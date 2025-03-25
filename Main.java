@@ -34,14 +34,8 @@ public class Main extends JFrame{
             cardLayout.show(cardPanel,selectedItem);
         });
 
-
-
         add(dropdown, BorderLayout.NORTH);
         add(cardPanel, BorderLayout.CENTER);
-
-
-
-
 
         setSize(500, 500);
         setVisible(true);
