@@ -59,6 +59,5 @@ public class Main extends JFrame{
         return panel;
     }
 
-
     public static void main(String[] args) {new Main();}
 }
