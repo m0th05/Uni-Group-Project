@@ -20,10 +20,12 @@ public class Main extends JFrame{
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
+        // initialised panels
         JPanel sales = makeSalesPage();
         JPanel inventory = makeInventoryPage();
         JPanel report = makeReportPage();
 
+        // added in panels to the window
         cardPanel.add(sales, "Sales");
         cardPanel.add(inventory, "Inventory");
         cardPanel.add(report,"Report");
@@ -41,18 +43,33 @@ public class Main extends JFrame{
         setVisible(true);
     }
 
+    // panel for sales page, need to figure out how to add stuff to the page
     private JPanel makeSalesPage() {
         JPanel panel = new JPanel();
-        panel.add(new JLabel("sales panel"));
+        JButton test = new JButton("test");
+        JTextArea textArea = new JTextArea(10,10);
+        panel.setLayout(new BorderLayout());
+        // this is all test changes, so it outlines how it works for the rest of the panels
+        panel.add(new JLabel("sales panel"), BorderLayout.NORTH);
+        panel.add(textArea, BorderLayout.CENTER);
+        panel.add(test, BorderLayout.SOUTH);
         return panel;
     }
 
+    // panel for inventory page, need to figure out how to add stuff to the page
     private JPanel makeInventoryPage() {
         JPanel panel = new JPanel();
+        JButton test = new JButton("Test");
+        JTextArea textArea = new JTextArea(10,30);
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
         panel.add(new JLabel("inventory panel"));
+        panel.add(test);
+        panel.add(new JButton("test 2"));
+        panel.add(textArea);
         return panel;
     }
 
+    // panel for report page, need to figure out how to add stuff to the page
     private JPanel makeReportPage() {
         JPanel panel = new JPanel();
         panel.add(new JLabel("report panel"));
@@ -60,4 +77,9 @@ public class Main extends JFrame{
     }
 
     public static void main(String[] args) {new Main();}
+}
+
+// store management class, all the functions go here and will be called upon later in the code when we figure how to add stuff to the panels
+class StoreManagement {
+    // add functionality
 }
