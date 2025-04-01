@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Main extends JFrame{
@@ -46,25 +44,27 @@ public class Main extends JFrame{
     // panel for sales page, need to figure out how to add stuff to the page
     private JPanel makeSalesPage() {
         JPanel panel = new JPanel();
-        JButton test = new JButton("test");
-        JTextArea textArea = new JTextArea(10,10);
-        panel.setLayout(new BorderLayout());
+        JButton addSale = new JButton("add sale");
+        JButton removeSale = new JButton("remove sale");
+        JTextArea textArea = new JTextArea(10,30);
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 30,30));
         // this is all test changes, so it outlines how it works for the rest of the panels
-        panel.add(new JLabel("sales panel"), BorderLayout.NORTH);
-        panel.add(textArea, BorderLayout.CENTER);
-        panel.add(test, BorderLayout.SOUTH);
+        panel.add(new JLabel("sales panel"));
+        panel.add(addSale);
+        panel.add(removeSale);
+        panel.add(textArea);
         return panel;
     }
 
     // panel for inventory page, need to figure out how to add stuff to the page
     private JPanel makeInventoryPage() {
         JPanel panel = new JPanel();
-        JButton test = new JButton("Test");
+        JButton addInvent = new JButton("add inventory");
         JTextArea textArea = new JTextArea(10,30);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
         panel.add(new JLabel("inventory panel"));
-        panel.add(test);
-        panel.add(new JButton("test 2"));
+        panel.add(addInvent);
+        panel.add(new JButton("Remove inventory"));
         panel.add(textArea);
         return panel;
     }
