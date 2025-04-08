@@ -60,11 +60,12 @@ public class Main extends JFrame{
     private JPanel makeInventoryPage() {
         JPanel panel = new JPanel();
         JButton addInvent = new JButton("add inventory");
+        JButton removeInvent = new JButton("remove inventory");
         JTextArea textArea = new JTextArea(10,30);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
         panel.add(new JLabel("inventory panel"));
         panel.add(addInvent);
-        panel.add(new JButton("Remove inventory"));
+        panel.add(removeInvent);
         panel.add(textArea);
         return panel;
     }
@@ -72,7 +73,11 @@ public class Main extends JFrame{
     // panel for report page, need to figure out how to add stuff to the page
     private JPanel makeReportPage() {
         JPanel panel = new JPanel();
+        JButton printReport = new JButton("Print Report");
+        JTextArea textArea = new JTextArea(20,30);
         panel.add(new JLabel("report panel"));
+        panel.add(printReport);
+        panel.add(textArea);
         return panel;
     }
 
@@ -82,4 +87,25 @@ public class Main extends JFrame{
 // store management class, all the functions go here and will be called upon later in the code when we figure how to add stuff to the panels
 class StoreManagement {
     // add functionality
+    public void addSaleButton() {
+
+    }
+
+    public void removeSaleButton(){
+
+    }
+
+    public void addInventoryButton() {
+
+    }
+
+    public void removeInventoryButton() {
+
+    }
+
+    public void printReportButton() {
+
+    }
+
+    // these are temporary names
 }
