@@ -5,7 +5,29 @@ Our group project git repo for version control, any versions that are uploaded t
 team and task seperation:
 (put your name and github name)
 
-program we are going to code:
+things to do:
+
+- add in functionality
+- comment code
+- test
+- make fixes
+- document
+
+
+add in functionality:
+we need to add in functionality for the code to be able to actually do things that is all in a seperate class
+
+comment code:
+make proper comments in the code and make sure it is readable
+
+test:
+we need to test the product and upload test results of all of the functionality preferably in a text file 
+
+make fixes:
+make sure that any issues that have been found are fixed
+
+document:
+simply document everything we have done and how it works
 
 
 
