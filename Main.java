@@ -23,7 +23,6 @@ public class Main extends JFrame{
         cardPanel = new JPanel(cardLayout);
         setDefaultCloseOperation(EXIT_ON_CLOSE);    //  Exits program when window is closed
 
-
         // initialised panels
         JPanel sales = makeSalesPage();
         JPanel inventory = makeInventoryPage();
