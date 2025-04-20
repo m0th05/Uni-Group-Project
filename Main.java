@@ -1,22 +1,28 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main extends JFrame{
     private ArrayList<String> products;
     private ArrayList<String> sales;
-    private int initInventory;
-    private int endInventory;
     private final CardLayout cardLayout;
     private final JPanel cardPanel;
     String[] items = {"Sales", "Inventory", "Report"};
 
 
-    public Main() {
+    public Main() {                                 //  Initialises the window
         setTitle("Store management");
         setLayout(new BorderLayout());
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);    //  Exits program when window is closed
+
 
         // initialised panels
         JPanel sales = makeSalesPage();
@@ -56,19 +62,140 @@ public class Main extends JFrame{
         return panel;
     }
 
-    // panel for inventory page, need to figure out how to add stuff to the page
-    private JPanel makeInventoryPage() {
-        JPanel panel = new JPanel();
-        JButton addInvent = new JButton("add inventory");
-        JButton removeInvent = new JButton("remove inventory");
-        JTextArea textArea = new JTextArea(10,30);
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
-        panel.add(new JLabel("inventory panel"));
-        panel.add(addInvent);
-        panel.add(removeInvent);
-        panel.add(textArea);
-        return panel;
+    // INVENTORY PAGE COMPLETED BY S.W. ---------------------------------------------------------------------------
+    public JPanel makeInventoryPage() {
+        HashMap<AtomicInteger, JButton> RowMap = new HashMap<>();
+
+        JPanel InvPanel = new JPanel(new BorderLayout());
+        JPanel ControlPanel = new JPanel(new GridLayout(1,3, 5, 5));
+        JLabel InvHeader = new JLabel("Inventory Panel");               //
+        JButton AddRowButton = new JButton("Create Row");               //  Adds the control row
+        JButton SaveInventoryButton = new JButton("Save");              //  to the Inv page
+        ControlPanel.add(InvHeader);                                        //
+        ControlPanel.add(AddRowButton);                                     //
+        ControlPanel.add(SaveInventoryButton);                              //
+        InvPanel.add(ControlPanel, BorderLayout.NORTH);
+
+        JPanel InvPageContents = new JPanel();
+        InvPageContents.setLayout(new BoxLayout(InvPageContents, BoxLayout.Y_AXIS));
+        loadInventoryFromFile(InvPageContents);
+        JScrollPane scrollPane = new JScrollPane(InvPageContents);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        InvPanel.add(scrollPane, BorderLayout.CENTER);
+        AtomicInteger RowCounter = new AtomicInteger(1);
+
+        // ADD ROW BUTTON FUNCTIONALITY
+        AddRowButton.addActionListener(_ -> {                 //  ADDS A ROW TO THE PAGE
+            JPanel RowPanel = new JPanel(new GridLayout(1,3, 10, 10));
+            JButton DeleteRowButton = new JButton("Del");
+            JTextField ItemTextField = new JTextField(10);
+            JTextField StockTextField = new JTextField(10);
+
+            RowPanel.add(DeleteRowButton);
+            RowPanel.add(ItemTextField);
+            RowPanel.add(StockTextField);
+            InvPageContents.add(RowPanel);
+
+            AtomicInteger rowID = new AtomicInteger(RowCounter.getAndIncrement());
+            RowMap.put(rowID, DeleteRowButton);
+
+            InvPanel.repaint();
+            InvPanel.revalidate();
+
+
+            RowPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, RowPanel.getPreferredSize().height)); // Ensures uniform row width
+            InvPageContents.add(RowPanel);
+            InvPageContents.revalidate();
+            InvPageContents.repaint();
+
+
+            DeleteRowButton.addActionListener(_ -> {
+                InvPageContents.remove(RowPanel);
+                InvPageContents.revalidate();
+                InvPageContents.repaint();
+            });
+        });
+
+        // SAVE BUTTON FUNCTIONALITY
+        SaveInventoryButton.addActionListener(_ -> {
+            try (FileWriter writer = new FileWriter("inventory.txt")) {
+                for (Component comp : InvPageContents.getComponents()) {
+                    if (comp instanceof JPanel) {
+                        JPanel row = (JPanel) comp;
+                        Component[] rowComponents = row.getComponents();
+
+                        if (rowComponents.length >= 3
+                                && rowComponents[1] instanceof JTextField
+                                && rowComponents[2] instanceof JTextField) {
+
+                            JTextField itemField = (JTextField) rowComponents[1];
+                            JTextField stockField = (JTextField) rowComponents[2];
+
+                            writer.write(itemField.getText() + "," + stockField.getText() + "\n");
+                        }
+                    }
+                }
+                System.out.println("Inventory saved successfully!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        return InvPanel;
     }
+
+    private void loadInventoryFromFile(JPanel InvPageContents) {
+        // Clear existing rows but keep the header row
+        InvPageContents.removeAll();
+
+        // Add the header row FIRST before loading saved data
+        JPanel LabelRowPanel = new JPanel(new GridLayout(1,3));
+        JLabel DelHeader = new JLabel("Delete Row");
+        JLabel ItemHeader = new JLabel("Item");
+        JLabel StockHeader = new JLabel("Stock");
+
+        LabelRowPanel.add(DelHeader);
+        LabelRowPanel.add(ItemHeader);
+        LabelRowPanel.add(StockHeader);
+        InvPageContents.add(LabelRowPanel);
+
+        // Load saved rows
+        try (BufferedReader reader = new BufferedReader(new FileReader("inventory.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 2) {
+                    JPanel RowPanel = new JPanel(new GridLayout(1,3, 10, 10));
+                    JButton DeleteRowButton = new JButton("Del");
+                    JTextField ItemTextField = new JTextField(data[0], 10);
+                    JTextField StockTextField = new JTextField(data[1], 10);
+
+                    RowPanel.add(DeleteRowButton);
+                    RowPanel.add(ItemTextField);
+                    RowPanel.add(StockTextField);
+
+                    InvPageContents.add(RowPanel);
+
+                    // Delete button functionality
+                    DeleteRowButton.addActionListener(_ -> {
+                        InvPageContents.remove(RowPanel);
+                        InvPageContents.revalidate();
+                        InvPageContents.repaint();
+                    });
+                }
+            }
+            System.out.println("Inventory loaded successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Refresh UI
+        InvPageContents.revalidate();
+        InvPageContents.repaint();
+    }
+
+    //  END OF SECTION COMPLETED BY S.W. --------------------------------------------------------------------------
 
     // panel for report page, need to figure out how to add stuff to the page
     private JPanel makeReportPage() {
