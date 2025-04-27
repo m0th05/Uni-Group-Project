@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+//Have inventory check for file and create one if not present
+//Add validation to inventory page
+//try get graph to work
+//  
+
 public class Main extends JFrame {
     private final ArrayList<String> sales;
     private final CardLayout cardLayout;
@@ -244,6 +250,8 @@ public class Main extends JFrame {
 
     //  END OF SECTION COMPLETED BY S.W. --------------------------------------------------------------------------
 
+    // TB---------------------------------------------------------------------------------------------------------------
+
     // panel for report page, need to figure out how to add stuff to the page
     private JPanel makeReportPage() {
         JPanel panel = new JPanel();
@@ -252,6 +260,34 @@ public class Main extends JFrame {
         panel.add(new JLabel("report panel"));
         panel.add(printReport);
         panel.add(textArea);
+
+        printReport.addActionListener(e -> {
+            StringBuilder report = new StringBuilder();
+            report.append("=== Sales Report ===\n\n");
+
+            // Reads Sales
+            if (sales.isEmpty()) {
+                report.append("No sales recorded.\n");
+            } else {
+                for (String sale : sales) {
+                    report.append(sale).append("\n");
+                }
+            }
+
+            report.append("\n=== Inventory Report ===\n\n");
+
+            // Load inventory from file
+            try (BufferedReader reader = new BufferedReader(new FileReader("inventory.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    report.append(line).append("\n");
+                }
+            } catch (IOException ex) {
+                report.append("Error loading inventory.\n");
+            }
+
+            textArea.setText(report.toString());
+        });
         return panel;
     }
 
@@ -259,6 +295,7 @@ public class Main extends JFrame {
         new Main();
     }
 }
+//TB--------------------------------------------------------------------------------------------------------------------
 
 // store management class, all the functions go here and will be called upon later in the code when we figure how to add stuff to the panels
 class StoreManagement {
