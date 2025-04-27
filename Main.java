@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 //Have inventory check for file and create one if not present
 //Add validation to inventory page
 //try get graph to work
-//  
+//
 
 public class Main extends JFrame {
     private final ArrayList<String> sales;
@@ -27,9 +27,9 @@ public class Main extends JFrame {
         sales = new ArrayList<>();
 
         // initialised panels
-        JPanel salesPanel = makeSalesPage();
-        JPanel inventory = makeInventoryPage();
-        JPanel report = makeReportPage();
+        SalesPage salesPanel = new SalesPage(sales);
+        InventoryPage inventory = new InventoryPage();
+        ReportPage report = new ReportPage(sales);
 
         // added in panels to the window
         cardPanel.add(salesPanel, "Sales");
@@ -49,19 +49,32 @@ public class Main extends JFrame {
         setVisible(true);
     }
 
-    // panel for sales page, need to figure out how to add stuff to the page
-    private JPanel makeSalesPage() {
-        JPanel panel = new JPanel();
+
+
+
+    public static void main(String[] args) {
+        new Main();
+    }
+}
+
+// store management class, all the functions go here and will be called upon later in the code when we figure how to add stuff to the panels
+
+class SalesPage extends JPanel {
+    private ArrayList<String> sales;
+    private JTextArea textArea;
+
+    public SalesPage(ArrayList<String> sales) {
+        this.sales = sales;
         JButton addSale = new JButton("add sale");
         JButton removeSale = new JButton("remove sale");
         JTextArea textArea = new JTextArea(10, 30);
         textArea.setEditable(false);
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
         // this is all test changes, so it outlines how it works for the rest of the panels
-        panel.add(new JLabel("sales panel"));
-        panel.add(addSale);
-        panel.add(removeSale);
-        panel.add(new JScrollPane(textArea));
+        add(new JLabel("sales panel"));
+        add(addSale);
+        add(removeSale);
+        add(new JScrollPane(textArea));
 
 
 // START OF ANDREWS CODE ---------------------------------------------------------------------
@@ -108,22 +121,17 @@ public class Main extends JFrame {
                 }
             }
         });
-
-        return panel;
     }
-
     private void updateSalesTextArea(JTextArea textArea) {
         textArea.setText(String.join("\n", sales));
     }
+}
 
-// END OF SECTION BY ANDREW ---------------------------------------------------------------------------------------
-
-
-    // INVENTORY PAGE COMPLETED BY S.W. ---------------------------------------------------------------------------
-    public JPanel makeInventoryPage() {
+class InventoryPage extends JPanel {
+    public InventoryPage() {
         HashMap<AtomicInteger, JButton> RowMap = new HashMap<>();
 
-        JPanel InvPanel = new JPanel(new BorderLayout());
+        setLayout(new BorderLayout());
         JPanel ControlPanel = new JPanel(new GridLayout(1, 3, 5, 5));
         JLabel InvHeader = new JLabel("Inventory Panel");               //
         JButton AddRowButton = new JButton("Create Row");               //  Adds the control row
@@ -131,7 +139,7 @@ public class Main extends JFrame {
         ControlPanel.add(InvHeader);                                        //
         ControlPanel.add(AddRowButton);                                     //
         ControlPanel.add(SaveInventoryButton);                              //
-        InvPanel.add(ControlPanel, BorderLayout.NORTH);
+        add(ControlPanel, BorderLayout.NORTH);
 
         JPanel InvPageContents = new JPanel();
         InvPageContents.setLayout(new BoxLayout(InvPageContents, BoxLayout.Y_AXIS));
@@ -140,7 +148,7 @@ public class Main extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        InvPanel.add(scrollPane, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
         AtomicInteger RowCounter = new AtomicInteger(1);
 
         // ADD ROW BUTTON FUNCTIONALITY
@@ -193,8 +201,6 @@ public class Main extends JFrame {
                 e.printStackTrace();
             }
         });
-
-        return InvPanel;
     }
 
     private void loadInventoryFromFile(JPanel InvPageContents) {
@@ -243,33 +249,30 @@ public class Main extends JFrame {
             e.printStackTrace();
         }
 
-        // Refresh UI
         InvPageContents.revalidate();
         InvPageContents.repaint();
     }
+}
 
-    //  END OF SECTION COMPLETED BY S.W. --------------------------------------------------------------------------
-
-    // TB---------------------------------------------------------------------------------------------------------------
-
-    // panel for report page, need to figure out how to add stuff to the page
-    private JPanel makeReportPage() {
-        JPanel panel = new JPanel();
+class ReportPage extends JPanel{
+    private ArrayList<String> salesData;
+    public ReportPage(ArrayList<String> salesData) {
+        this.salesData = salesData;
         JButton printReport = new JButton("Print Report");
         JTextArea textArea = new JTextArea(20, 30);
-        panel.add(new JLabel("report panel"));
-        panel.add(printReport);
-        panel.add(textArea);
+        add(new JLabel("report panel"));
+        add(printReport);
+        add(textArea);
 
         printReport.addActionListener(e -> {
             StringBuilder report = new StringBuilder();
             report.append("=== Sales Report ===\n\n");
 
             // Reads Sales
-            if (sales.isEmpty()) {
+            if (salesData.isEmpty()) {
                 report.append("No sales recorded.\n");
             } else {
-                for (String sale : sales) {
+                for (String sale : salesData) {
                     report.append(sale).append("\n");
                 }
             }
@@ -288,32 +291,5 @@ public class Main extends JFrame {
 
             textArea.setText(report.toString());
         });
-        return panel;
     }
-
-    public static void main(String[] args) {
-        new Main();
-    }
-}
-//TB--------------------------------------------------------------------------------------------------------------------
-
-// store management class, all the functions go here and will be called upon later in the code when we figure how to add stuff to the panels
-class StoreManagement {
-    // add functionality
-    public void addSaleButton() {
-    }
-
-    public void removeSaleButton() {
-    }
-
-    public void addInventoryButton() {
-    }
-
-    public void removeInventoryButton() {
-    }
-
-    public void printReportButton() {
-    }
-
-    // these are temporary names
 }

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edb768b-6945-4ff2-84e2-a5e2b9626cc5" name="Changes" comment="changed some stuff" />
+    <list default="true" id="7edb768b-6945-4ff2-84e2-a5e2b9626cc5" name="Changes" comment="added some function names and changed some buttons">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Uni-Group-Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Uni-Group-Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Uni-Group-Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Uni-Group-Project/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Uni-Group-Project/StoreManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Uni-Group-Project/StoreManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Uni-Group-Project/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Uni-Group-Project/readme.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,41 +26,40 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "m0th05"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;m0th05&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/m0th05/Uni-Group-Project.git",
-    "accountId": "11d1e3a3-aa96-4b00-af37-15e2ffc71191"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/m0th05/Uni-Group-Project.git&quot;,
+    &quot;accountId&quot;: &quot;11d1e3a3-aa96-4b00-af37-15e2ffc71191&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2uo2wmDjZAG2NURC4pavBZptf5z" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/salty/IdeaProjects/Uni-Group-Project"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/salty/IdeaProjects/Uni-Group-Project&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\salty\IdeaProjects\Uni-Group-Project" />
@@ -109,12 +114,39 @@
       <option name="project" value="LOCAL" />
       <updated>1742903604180</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="made some comments, outlined what needs to be done and done some experiments">
+      <option name="closed" value="true" />
+      <created>1743501418934</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1743501418934</updated>
+    </task>
+    <task id="LOCAL-00007" summary="made class and added buttons to panels">
+      <option name="closed" value="true" />
+      <created>1743502103245</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743502103245</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added some function names and changed some buttons">
+      <option name="closed" value="true" />
+      <created>1744104339422</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744104339422</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added in test files" />
     <MESSAGE value="changed some stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed some stuff" />
+    <MESSAGE value="made some comments, outlined what needs to be done and done some experiments" />
+    <MESSAGE value="made class and added buttons to panels" />
+    <MESSAGE value="added some function names and changed some buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some function names and changed some buttons" />
   </component>
 </project>
