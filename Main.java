@@ -79,35 +79,48 @@ class SalesPage extends JPanel {
 
 // START OF ANDREWS CODE ---------------------------------------------------------------------
         addSale.addActionListener(e -> {
-            JTextField nameField = new JTextField();
-            JTextField amountField = new JTextField();
-            JTextField priceField = new JTextField();
+                    JTextField nameField = new JTextField();
+                    JTextField amountField = new JTextField();
+                    JTextField priceField = new JTextField();
 
-            JPanel inputPanel = new JPanel(new GridLayout(3, 2));
-            inputPanel.add(new JLabel("Name:"));
-            inputPanel.add(nameField);
-            inputPanel.add(new JLabel("Amount of items:"));
-            inputPanel.add(amountField);
-            inputPanel.add(new JLabel("Total:"));
-            inputPanel.add(priceField);
+                    JPanel inputPanel = new JPanel(new GridLayout(3, 2));
+                    inputPanel.add(new JLabel("Name:"));
+                    inputPanel.add(nameField);
+                    inputPanel.add(new JLabel("Amount of items:"));
+                    inputPanel.add(amountField);
+                    inputPanel.add(new JLabel("Total:"));
+                    inputPanel.add(priceField);
 
-            int result = JOptionPane.showConfirmDialog(null, inputPanel,
-                    "Enter Sale Details", JOptionPane.OK_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(null, inputPanel,
+                            "Enter Sale Details", JOptionPane.OK_CANCEL_OPTION);
 
-            if (result == JOptionPane.OK_OPTION) {
-                String name = nameField.getText().trim();
-                String amount = amountField.getText().trim();
-                String price = priceField.getText().trim();
+                    if (result == JOptionPane.OK_OPTION) {
 
-                if (!name.isEmpty() && !amount.isEmpty() && !price.isEmpty()) {
-                    String entry = "Name: " + name + " | Amount of items: " + amount + " | Total: " + price;
-                    sales.add(entry);
-                    updateSalesTextArea(textArea);
-                } else {
-                    JOptionPane.showMessageDialog(null, "All fields must be filled.");
-                }
-            }
+                        String amount = amountField.getText().trim();
+                        String price = priceField.getText().trim();
+                        String name = nameField.getText().trim();
+
+                        try {
+                            if (name.isEmpty()) { //Makes sure "name" is inputted
+                                JOptionPane.showMessageDialog(null, "Name cannot be empty.");
+                                return;
+                            }
+
+                            int amountInt = Integer.parseInt(amount); //Makes sure Amount is int
+                            double priceDouble = Double.parseDouble(price); //Makes sure Price is double
+
+
+                            String entry = "Name: " + name + ", Amount: " + amount + ", Price: " + price;
+                            sales.add(entry);
+                            updateSalesTextArea(textArea);
+
+                        } catch (NumberFormatException exception) {
+                            JOptionPane.showMessageDialog(null, "Invalid number entered.");
+                        }
+                    }
         });
+
+
 
         removeSale.addActionListener(e -> {
             String nameToRemove = JOptionPane.showInputDialog("Enter name of sale to remove:");
